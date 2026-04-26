@@ -7,13 +7,27 @@ Ubuntu 기반의 올인원 빌드용 Docker 이미지입니다. 여러 언어와
 - Base image: `ubuntu:latest`
 - APT 기본 도구: `curl`, `git`, `gnupg`, `unzip`, `xz-utils`, `build-essential`, `pkg-config`
 - 언어/빌드 도구: `cargo`, `golang`, `python3`, `python3-dev`
+- Android 빌드 도구:
+  - `openjdk-17-jdk`
+  - Android SDK Command-line Tools (`sdkmanager`)
+  - `platform-tools`
+  - `build-tools;35.0.0`
+  - `platforms;android-35`
+- Flutter 빌드 도구:
+  - Flutter SDK (`stable` 브랜치)
+  - Dart SDK (Flutter 포함)
 - 추가 런타임 설치:
   - `uv`
   - `uv python install --default`
   - `Volta`
   - 최신 `node`
   - `bun`
-  - `rustup`
+- `rustup`
+- Android 환경 변수:
+  - `ANDROID_SDK_ROOT=/opt/android-sdk`
+  - `ANDROID_HOME=/opt/android-sdk`
+- Flutter 환경 변수:
+  - `FLUTTER_HOME=/opt/flutter`
 - 기본 작업 디렉터리: `/workspace`
 
 ## 이미지 빌드
@@ -57,6 +71,8 @@ docker run --rm -it docker-aio-builder-image node --version
 docker run --rm -it docker-aio-builder-image python --version
 docker run --rm -it docker-aio-builder-image bun --version
 docker run --rm -it docker-aio-builder-image cargo --version
+docker run --rm -it docker-aio-builder-image sdkmanager --version
+docker run --rm -it docker-aio-builder-image flutter --version
 ```
 
 ## 동작 방식

@@ -11,8 +11,11 @@ fi
 export VOLTA_HOME="${VOLTA_HOME:-$HOME/.volta}"
 export UV_HOME="${UV_HOME:-$HOME/.local/bin}"
 export BUN_INSTALL="${BUN_INSTALL:-$HOME/.bun}"
+export ANDROID_SDK_ROOT="${ANDROID_SDK_ROOT:-/opt/android-sdk}"
+export ANDROID_HOME="${ANDROID_HOME:-$ANDROID_SDK_ROOT}"
+export FLUTTER_HOME="${FLUTTER_HOME:-/opt/flutter}"
 
-for runtime_path in "$UV_HOME" "$BUN_INSTALL/bin" "$HOME/.cargo/bin"; do
+for runtime_path in "$UV_HOME" "$BUN_INSTALL/bin" "$HOME/.cargo/bin" "$ANDROID_SDK_ROOT/cmdline-tools/latest/bin" "$ANDROID_SDK_ROOT/platform-tools" "$FLUTTER_HOME/bin" "$FLUTTER_HOME/bin/cache/dart-sdk/bin"; do
     case ":${PATH}:" in
         *":${runtime_path}:"*) ;;
         *) export PATH="${runtime_path}:${PATH}" ;;
