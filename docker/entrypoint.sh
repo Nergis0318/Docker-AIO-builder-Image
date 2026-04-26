@@ -9,6 +9,16 @@ if [[ -f /etc/environment ]]; then
 fi
 
 export VOLTA_HOME="${VOLTA_HOME:-$HOME/.volta}"
+export UV_HOME="${UV_HOME:-$HOME/.local/bin}"
+export BUN_INSTALL="${BUN_INSTALL:-$HOME/.bun}"
+
+for runtime_path in "$UV_HOME" "$BUN_INSTALL/bin" "$HOME/.cargo/bin"; do
+    case ":${PATH}:" in
+        *":${runtime_path}:"*) ;;
+        *) export PATH="${runtime_path}:${PATH}" ;;
+    esac
+done
+
 case ":${PATH}:" in
     *":${VOLTA_HOME}/bin:"*) ;;
     *) export PATH="${VOLTA_HOME}/bin:${PATH}" ;;

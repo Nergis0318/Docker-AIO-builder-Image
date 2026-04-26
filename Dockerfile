@@ -31,7 +31,7 @@ RUN apt update && apt install -y --no-install-recommends \
 RUN apt clean && rm -rf /var/lib/apt/lists/*
 
 ENV VOLTA_HOME=/root/.volta
-ENV PATH=$VOLTA_HOME/bin:$PATH
+ENV PATH=/root/.local/bin:/root/.cargo/bin:/root/.bun/bin:$VOLTA_HOME/bin:$PATH
 
 COPY docker/init.sh /init.sh
 
