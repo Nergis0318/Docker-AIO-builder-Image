@@ -4,6 +4,9 @@ ARG DEBIAN_FRONTEND=noninteractive
 ARG MIRROR=https://mirror.xeon.kr
 
 ENV DEBIAN_FRONTEND=${DEBIAN_FRONTEND}
+ENV ANDROID_SDK_ROOT=/opt/android-sdk
+ENV ANDROID_HOME=/opt/android-sdk
+ENV FLUTTER_HOME=/opt/flutter
 
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 
@@ -26,12 +29,13 @@ RUN apt update && apt install -y --no-install-recommends \
     golang \
     python3 \
     python3-dev \
-    pkg-config
+    pkg-config \
+    openjdk-17-jdk
 
 RUN apt clean && rm -rf /var/lib/apt/lists/*
 
 ENV VOLTA_HOME=/root/.volta
-ENV PATH=/root/.local/bin:/root/.cargo/bin:/root/.bun/bin:$VOLTA_HOME/bin:$PATH
+ENV PATH=/root/.local/bin:/root/.cargo/bin:/root/.bun/bin:$VOLTA_HOME/bin:$ANDROID_SDK_ROOT/cmdline-tools/latest/bin:$ANDROID_SDK_ROOT/platform-tools:$FLUTTER_HOME/bin:$FLUTTER_HOME/bin/cache/dart-sdk/bin:$PATH
 
 COPY docker/init.sh /init.sh
 
